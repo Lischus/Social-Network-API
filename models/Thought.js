@@ -16,7 +16,9 @@
 // Schema Settings:
 // Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
 
-const { Schema, Types } = require("mongoose");
+const { Timestamp } = require("bson");
+const { Schema } = require("mongoose");
+const reactionSchema = require("./Reaction");
 
 const thoughtSchema = new Schema(
   {
@@ -34,7 +36,7 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    reactions: {},
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
@@ -45,5 +47,9 @@ const thoughtSchema = new Schema(
 );
 
 thoughtSchema.virtual("reactionCount").get(function () {
-  return this.reactions;
+  return this.reactions.length;
 });
+
+const Thought = model("Thought", thoughtSchema);
+
+module.exports = Thought;
