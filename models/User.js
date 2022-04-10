@@ -1,23 +1,4 @@
-// username
-// String
-// Unique
-// Required
-// Trimmed
-
-// email
-// String
-// Required
-// Unique
-// Must match a valid email address (look into Mongoose's matching validation)
-
-// thoughts
-// Array of _id values referencing the Thought model
-
-// friends
-// Array of _id values referencing the User model (self-reference)
-
-const { Schema, Types } = require("mongoose");
-const { Thought } = require("./Thought");
+const { Schema, model } = require("mongoose");
 
 var validateEmail = function (email) {
   var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
